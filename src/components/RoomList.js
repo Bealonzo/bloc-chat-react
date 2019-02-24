@@ -21,12 +21,10 @@ class RoomList extends Component {
         });
     }
     render() {
-            const roomList = this.state.Rooms.map((room) =>
-						< li key = {room.key} > {room.name} < /li>);
-								
-                return
-								( < ul > {roomList } < /ul>
-									);
+            const roomList = this.state.Rooms.map((room) => < li key = {room.key} > {room.name} < /li>);
+
+
+						return (<ul> {roomList}</ul>);
                 }
             }
             export default RoomList;
