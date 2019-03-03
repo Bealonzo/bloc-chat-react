@@ -10,32 +10,30 @@ class RoomList extends Component {
             value: ''
         };
         this.roomsRef = this.props.firebase.database().ref('Rooms');
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+
     }
     componentDidMount() {
         this.roomsRef.on('child_added', snapshot => {
             const room = snapshot.val();
             room.key = snapshot.key;
-            this.setState({
-                Rooms: this.state.Rooms.concat(room)
+            this.setState({ Rooms: this.state.Rooms.concat(room)
             });
         });
     }
 
     handleChange(event) {
-        this.setState({
-            value: event.target.value
-        });
+        this.setState({value: event.target.value});
     }
 
-    handleSubmit(event) {
+    createNewRoom(event) {
         event.preventDefault();
-        this.roomsRef.push({
-            name: this.state.value
-        });
+        this.roomsRef.push({ name: this.state.value });
 
     }
+
+    selectRoom(key) {
+        this.props.activeRoom(key);
+}
     render() {
 
 
@@ -45,16 +43,23 @@ class RoomList extends Component {
 
 
           return (
+            <section>
               <div>
-                <form onSubmit={this.handleSubmit}>
-                  <label>
-                      Create a new Room:
-                        <input type='text' value={this.state.value} onChange={this.handleChange} />
-                  </label>
-              <input type='submit' value='Submit' />
-          </form>
-          <ul>{roomList}</ul>
-          </div>
+                 <h3>Rooms:</h3>
+                 <ul>
+                     {this.state.Rooms.map((room) => {
+                         return (
+                             <div key={room.key} onClick={(event) => this.selectRoom(room, event)}>{room.name}</div>
+                         )
+                     })}
+                 </ul>
+              </div>
+
+              <form id="createNewRoom">
+                    <input type="text" value={this.state.newRoom} onChange={(event) => this.handleChange(event)} />
+                    <input type="submit" onClick={(event) => this.createNewRoom(event)} />
+                </form>
+              </section>
 
       );
                 }
