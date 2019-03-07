@@ -32,9 +32,7 @@ class App extends Component {
     }
 
     setActiveRoom(room) {
-        this.setState({
-            activeRoom: room
-        })
+        this.setState({ activeRoom: room })
     }
     setUser(user) {
         if (user === null) {
@@ -53,7 +51,7 @@ class App extends Component {
       <div className = "App">
       <header className = "header">
         <h1> Bloc Chat!</h1>
-        <User firebase={firebase} setUser={this.setUser.bind(this)} userName={this.state.user} />
+        <User firebase={firebase} setUser={this.setUser.bind(this)} user={this.state.user} />
       </header>
 
       <nav className="roomNav">

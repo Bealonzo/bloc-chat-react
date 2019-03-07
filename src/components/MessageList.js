@@ -16,9 +16,7 @@ class MessageList extends Component {
   }
 
 handleChange(event) {
-  this.setState({
-    content: event.target.value
-  });
+  this.setState({ content: event.target.value });
 }
 
 createChat(event, user) {
@@ -29,7 +27,8 @@ createChat(event, user) {
     sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
     roomId: this.props.activeRoom,
   });
-  this.setState({content: ""});
+  
+  this.setState({content: ''});
 }
 
 
@@ -46,7 +45,7 @@ createChat(event, user) {
       <section>
       <div className='messageList'>{messageList}</div>
       <form id="create-new-chat">
-      <input type="text" value={this.state.content} onChange={(event) => this.handleChange(event)} />
+        <input type="text" value={this.state.content} onChange={(event) => this.handleChange(event)} />
         <input type="submit" onClick={(event) => this.createChat(event)} />
       </form>
       </section>
